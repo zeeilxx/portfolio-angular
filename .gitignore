@@ -10,6 +10,20 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+*.log
+
+# Local environment (keep shareable templates)
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Local deployment and agent state
+/.vercel/
+/.netlify/
+/.codex/
+/.agents/
 
 # IDEs and editors
 .idea/
@@ -21,16 +35,11 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-!.vscode/mcp.json
+/.vscode/
 .history/*
 
 # Miscellaneous
-/.angular/cache
+/.angular/
 .sass-cache/
 /connect.lock
 /coverage

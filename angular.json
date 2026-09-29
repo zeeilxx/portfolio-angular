@@ -3,7 +3,7 @@
   "version": 1,
   "cli": {
     "packageManager": "npm",
-    "analytics": "967e80de-006a-4568-91d7-7d67d853ebf0"
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -27,7 +27,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "ignore": ["**/*.md", "**/.gitkeep"]
               }
             ],
             "styles": [

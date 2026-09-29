@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './shared/components/navbar';
+import { PageMotion } from './shared/components/page-motion';
 
 @Component({
   selector: 'app-root',
-  imports: [Navbar, RouterOutlet],
+  imports: [Navbar, RouterOutlet, PageMotion],
   template: `
-    <div class="min-h-screen bg-slate-50 text-slate-900">
-      <div class="mx-auto max-w-5xl px-6">
-        <app-navbar />
-        <main class="py-12">
-          <router-outlet />
-        </main>
-      </div>
+    <div id="top" appPageMotion>
+      <a class="skip-link" href="#main-content">Lewati navigasi</a>
+      <app-navbar />
+      <main id="main-content" tabindex="-1"><router-outlet /></main>
     </div>
   `,
 })
