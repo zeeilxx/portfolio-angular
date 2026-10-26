@@ -17,17 +17,17 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
     const links = fixture.nativeElement.querySelectorAll('nav a') as NodeListOf<HTMLAnchorElement>;
-    expect(Array.from(links, link => link.getAttribute('href'))).toEqual(['/#about', '/#experience', '/#work', '/#contact']);
+    expect(Array.from(links, link => link.getAttribute('href'))).toEqual(['/#about', '/#experience', '/#work', '/#skills', '/#contact']);
   });
 
   it('should load each feature and redirect unknown URLs to home', async () => {
     const harness = await RouterTestingHarness.create();
     for (const [url, heading] of [
-      ['/', 'Membangun web.'],
+      ['/', 'FullstackDeveloper'],
       ['/projects', 'Projects'],
       ['/contact', 'Contact'],
-      ['/experience', 'Membangun web.'],
-      ['/unknown', 'Membangun web.'],
+      ['/experience', 'FullstackDeveloper'],
+      ['/unknown', 'FullstackDeveloper'],
     ]) {
       await harness.navigateByUrl(url);
       expect(harness.routeNativeElement?.querySelector('h1')?.textContent).toContain(heading);
@@ -40,7 +40,7 @@ describe('App', () => {
     const dialog = root.querySelector('.project-dialog') as HTMLDialogElement;
     // jsdom does not implement native modal opening.
     dialog.showModal = () => dialog.setAttribute('open', '');
-    const open = root.querySelector('[aria-label="Lihat detail Dicicilaja.com"]') as HTMLButtonElement;
+    const open = root.querySelector('[aria-label="View details for Dicicilaja.com"]') as HTMLButtonElement;
     open.click();
     harness.detectChanges();
     const project = projects.find(item => item.id === 'dicicilaja')!;

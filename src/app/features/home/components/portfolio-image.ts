@@ -9,8 +9,8 @@ import { afterNextRender, Component, ElementRef, input, signal, viewChild } from
         decoding="async" [attr.fetchpriority]="priority() ? 'high' : 'auto'"
         (error)="failedSrc.set(src())" />
     } @else {
-      <div class="image-placeholder" role="img" [attr.aria-label]="alt() + ' — gambar belum tersedia'">
-        <span aria-hidden="true">+</span><strong>{{ alt() }}</strong><small>Gambar belum tersedia</small>
+      <div class="image-placeholder" role="img" [attr.aria-label]="alt() + ' — image not yet available'">
+        <span aria-hidden="true">+</span><strong>{{ alt() }}</strong><small>Image not yet available</small>
       </div>
     }
   `,

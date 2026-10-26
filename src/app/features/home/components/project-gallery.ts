@@ -6,7 +6,7 @@ import { PortfolioImage } from './portfolio-image';
   selector: 'app-project-gallery',
   imports: [PortfolioImage],
   template: `
-    <section class="gallery" [attr.aria-label]="'Galeri ' + project().name"
+    <section class="gallery" [attr.aria-label]="'Gallery for ' + project().name"
       (keydown.arrowleft)="navigate(-1, $event)" (keydown.arrowright)="navigate(1, $event)">
       <div class="gallery-image">
         <app-portfolio-image [src]="activeImage().src"
@@ -15,21 +15,21 @@ import { PortfolioImage } from './portfolio-image';
       @if (images().length > 1) {
         <div class="gallery-controls">
           <div class="gallery-navigation">
-          <button class="gallery-arrow previous" type="button" aria-label="Gambar sebelumnya" (click)="navigate(-1)">
+          <button class="gallery-arrow previous" type="button" aria-label="Previous image" (click)="navigate(-1)">
             <span aria-hidden="true">←</span>
           </button>
-          <div class="gallery-options" aria-label="Pilih gambar">
+          <div class="gallery-options" aria-label="Select an image">
             @for (item of images(); track item.src; let i = $index) {
               <button class="gallery-dot" type="button" [attr.aria-pressed]="selectedIndex() === i"
-                [attr.aria-label]="'Lihat gambar ' + (i + 1) + ': ' + item.caption"
+                [attr.aria-label]="'View image ' + (i + 1) + ': ' + item.caption"
                 [title]="item.caption" (click)="selectedIndex.set(i)"><span aria-hidden="true"></span></button>
             }
           </div>
-          <button class="gallery-arrow next" type="button" aria-label="Gambar berikutnya" (click)="navigate(1)">
+          <button class="gallery-arrow next" type="button" aria-label="Next image" (click)="navigate(1)">
             <span aria-hidden="true">→</span>
           </button>
           </div>
-          <p aria-live="polite">Gambar {{ selectedIndex() + 1 }} / {{ images().length }} · {{ activeImage().caption }}</p>
+          <p aria-live="polite">Image {{ selectedIndex() + 1 }} / {{ images().length }} · {{ activeImage().caption }}</p>
         </div>
       }
     </section>
@@ -59,7 +59,7 @@ export class ProjectGallery implements OnChanges {
   protected readonly selectedIndex = signal(0);
   protected readonly images = computed(() => {
     const project = this.project();
-    return project.images?.length ? project.images : [{ src: project.image, caption: 'Pratinjau proyek' }];
+    return project.images?.length ? project.images : [{ src: project.image, caption: 'Project preview' }];
   });
   protected readonly activeImage = computed(() => this.images()[this.selectedIndex()] ?? this.images()[0]);
 

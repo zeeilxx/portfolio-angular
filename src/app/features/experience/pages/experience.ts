@@ -14,8 +14,8 @@ import type { Internship } from '../models/experience.model';
     >
       <div class="section-heading">
         <div>
-          <p class="eyebrow">02 / PENGALAMAN KERJA</p>
-          <h2 id="experience-title">Pengalaman <span class="serif-accent">kerja.</span></h2>
+          <p class="eyebrow">02 / WORK EXPERIENCE</p>
+          <h2 id="experience-title">Work <span class="serif-accent">experience.</span></h2>
         </div>
         <p>Frontend & Fullstack Development<br />PT. Adira Dinamika Multi Finance</p>
       </div>
@@ -39,12 +39,12 @@ import type { Internship } from '../models/experience.model';
                   [href]="experience.url"
                   target="_blank"
                   rel="noopener noreferrer"
-                  [attr.aria-label]="'Kunjungi ' + experience.website + ' (tab baru)'"
+                  [attr.aria-label]="'Visit ' + experience.website + ' (new tab)'"
                   >{{ experience.website }} ↗</a
                 >
               </div>
               <p class="experience-summary">{{ experience.summary }}</p>
-              <h3 class="experience-subtitle">Lingkup pekerjaan</h3>
+              <h3 class="experience-subtitle">Responsibilities</h3>
               <ul class="responsibility-list">
                 @for (responsibility of experience.responsibilities; track responsibility) {
                   <li>{{ responsibility }}</li>
@@ -63,16 +63,16 @@ import type { Internship } from '../models/experience.model';
                 }
               </div>
               <div class="experience-evidence">
-                <h3 class="experience-subtitle">Dokumentasi & sertifikat</h3>
+                <h3 class="experience-subtitle">Documentation & certificates</h3>
                 <div class="evidence-grid">
                   <app-experience-asset
                     [src]="experience.documentation ?? ''"
-                    label="Dokumentasi"
+                    label="Documentation"
                     [organization]="experience.organization"
                   />
                   <app-experience-asset
                     [src]="experience.certificate ?? ''"
-                    label="Sertifikat internship"
+                    label="Internship certificate"
                     [organization]="experience.organization"
                     [certificate]="true"
                   />

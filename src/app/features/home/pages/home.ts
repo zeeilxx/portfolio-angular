@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { PortfolioImage } from '../components/portfolio-image';
-import { certifications, education, profile, projects } from '../portfolio.data';
+import { certifications, education, profile, projects, skills } from '../portfolio.data';
 import { Experience } from '../../experience/pages/experience';
 import { organizations } from '../../experience/experience.data';
 import { PortfolioProject } from '../models/portfolio.model';
@@ -16,40 +16,44 @@ import { ProjectGallery } from '../components/project-gallery';
           <span class="status-dot"></span> {{ profile.role }} · {{ profile.location }}
         </p>
         <h1 id="hero-title">
-          Membangun web.<br /><span class="serif-accent">Menghubungkan ide.</span>
+          <span class="hero-title-line">Fullstack</span><br /><span
+            class="hero-title-line serif-accent"
+            >Developer</span
+          >
         </h1>
         <p class="hero-intro">
-          Halo, saya <strong>{{ profile.name }}.</strong><br />{{ profile.intro }}
+          Hello, I am <strong>{{ profile.name }}.</strong><br />{{ profile.intro }}
         </p>
         <div class="hero-actions">
           <a class="button button-dark" href="#work"
-            >Jelajahi karya <span aria-hidden="true">↗</span></a
+            >Explore my work <span aria-hidden="true">↗</span></a
           >
-          <a class="text-link" href="#about">Pendidikan <span aria-hidden="true">↘</span></a>
+          <a
+            class="button button-gray"
+            href="/CV_Ridhan_Fadhlil_Wafi.pdf"
+            download="CV_Ridhan_Fadhlil_Wafi.pdf"
+            >Download CV <span aria-hidden="true">↓</span></a
+          >
         </div>
         <div class="hero-note">
-          <span class="little-star" aria-hidden="true">+</span> Frontend & Fullstack Development<br />Pengalaman
-          magang di Adira Finance
+          <span class="little-star" aria-hidden="true">+</span> Frontend & Fullstack Development<br />Internship
+          experience at Adira Finance
         </div>
       </div>
       <div class="hero-visual">
         <div class="portrait-frame">
           <app-portfolio-image
             src="/images/Profile.jpg"
-            [alt]="'Potret ' + profile.name"
+            [alt]="'Portrait of ' + profile.name"
             [priority]="true"
           />
-          <span class="portrait-caption">THINK. BUILD. REFINE.</span>
         </div>
-        <span class="floating-label"
-          ><span class="status-dot"></span> Vue.js · TypeScript · Laravel</span
-        >
         <span class="hero-spark" aria-hidden="true">+</span>
         <span class="vertical-caption">WEB DEVELOPMENT / BOGOR</span>
       </div>
     </section>
 
-    <div class="expertise-strip" aria-label="Fokus keahlian">
+    <div class="expertise-strip" aria-label="Areas of expertise">
       <div class="section-shell strip-inner">
         <span>Frontend Development</span><i aria-hidden="true">+</i>
         <span>Fullstack Development</span><i aria-hidden="true">+</i> <span>API Integration</span
@@ -61,15 +65,15 @@ import { ProjectGallery } from '../components/project-gallery';
     <section id="about" class="about-section" aria-labelledby="about-title">
       <div class="section-shell education-grid">
         <div>
-          <p class="eyebrow">01 / PENDIDIKAN</p>
-          <h2 id="about-title">Fondasi <span class="serif-accent">pengembangan.</span></h2>
+          <p class="eyebrow">01 / EDUCATION</p>
+          <h2 id="about-title">Foundations of <span class="serif-accent">development.</span></h2>
         </div>
         <div class="about-copy">
           <p class="eyebrow">{{ education.period }}</p>
           <h3>{{ education.institution }}</h3>
           <p>{{ education.major }}</p>
           <p>
-            <strong>IPK: {{ education.gpa }}</strong>
+            <strong>GPA: {{ education.gpa }}</strong>
           </p>
           <p>{{ education.focus }}</p>
           <p>{{ education.activity }}</p>
@@ -82,22 +86,22 @@ import { ProjectGallery } from '../components/project-gallery';
     <section id="work" class="work-section section-shell" aria-labelledby="work-title">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">03 / PROYEK</p>
-          <h2 id="work-title">Dari ide, <span class="serif-accent">jadi karya.</span></h2>
+          <p class="eyebrow">03 / PROJECTS</p>
+          <h2 id="work-title">From ideas <span class="serif-accent">to creations.</span></h2>
         </div>
-        <p>Proyek pengembangan aplikasi<br />web dan mobile.</p>
+        <p>Web and mobile application<br />development projects.</p>
       </div>
       <div class="project-grid">
         @for (project of projects; track project.id) {
-          <article class="project-card" [class.featured]="project.id === 'style4u'">
+          <article class="project-card">
             <button
               class="project-preview"
               type="button"
               (click)="openProject(project, projectDialog)"
-              [attr.aria-label]="'Lihat detail ' + project.name"
+              [attr.aria-label]="'View details for ' + project.name"
             >
-              <app-portfolio-image [src]="project.image" [alt]="'Pratinjau ' + project.name" />
-              <span class="preview-pill">Lihat proyek <span aria-hidden="true">↗</span></span>
+              <app-portfolio-image [src]="project.image" [alt]="'Preview of ' + project.name" />
+              <span class="preview-pill">View project <span aria-hidden="true">↗</span></span>
             </button>
             <div class="project-info">
               <div>
@@ -124,8 +128,8 @@ import { ProjectGallery } from '../components/project-gallery';
     >
       <div class="section-heading">
         <div>
-          <p class="eyebrow">04 / ORGANISASI & KEPANITIAAN</p>
-          <h2 id="organization-title">Pengalaman organisasi.</h2>
+          <p class="eyebrow">04 / ORGANIZATIONS & COMMITTEES</p>
+          <h2 id="organization-title">Organizational experience.</h2>
         </div>
       </div>
       <div class="organization-list">
@@ -142,14 +146,14 @@ import { ProjectGallery } from '../components/project-gallery';
     <section class="certification-section section-shell" aria-labelledby="certification-title">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">05 / SERTIFIKASI</p>
-          <h2 id="certification-title">Belajar & <span class="serif-accent">berkembang.</span></h2>
+          <p class="eyebrow">05 / CERTIFICATIONS</p>
+          <h2 id="certification-title">Learn & <span class="serif-accent">grow.</span></h2>
         </div>
       </div>
-      <div class="skill-grid">
+      <div class="certification-grid">
         @for (certificate of certifications; track certificate.name) {
-          <article class="skill-card">
-            <span class="skill-index">{{ certificate.year }}</span>
+          <article class="certification-card">
+            <span class="certification-year">{{ certificate.year }}</span>
             <p class="eyebrow">{{ certificate.issuer }}</p>
             <h3>{{ certificate.name }}</h3>
             <p>{{ certificate.description }}</p>
@@ -158,31 +162,53 @@ import { ProjectGallery } from '../components/project-gallery';
       </div>
     </section>
 
+    <section id="skills" class="skills-section section-shell" aria-labelledby="skills-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">06 / SKILLS</p>
+          <h2 id="skills-title">Tools behind <span class="serif-accent">the work.</span></h2>
+        </div>
+        <p>Skills applied across my internships<br />and development projects.</p>
+      </div>
+      <div class="skills-list">
+        @for (skill of skills; track skill.id) {
+          <article class="skill-row" [attr.aria-labelledby]="'skill-' + skill.id">
+            <h3 [id]="'skill-' + skill.id">{{ skill.title }}</h3>
+            <ul class="skill-badges" [attr.aria-label]="skill.title + ' skills'">
+              @for (tag of skill.tags; track tag) {
+                <li>{{ tag }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </section>
+
     <section id="contact" class="contact-section section-shell" aria-labelledby="contact-title">
       <div class="contact-panel">
-        <p class="eyebrow">06 / KONTAK</p>
+        <p class="eyebrow">07 / CONTACT</p>
         <h2 id="contact-title">
-          Punya ide menarik?<br /><span class="serif-accent">Mari kita wujudkan.</span>
+          Have an exciting idea?<br /><span class="serif-accent">Let us bring it to life.</span>
         </h2>
         <p>
-          Proyek baru, kolaborasi, atau sekadar bertukar ide.<br />Percakapan yang baik selalu jadi
-          awal yang baik.
+          A new project, a collaboration, or simply an exchange of ideas.<br />A good conversation
+          is always a great start.
         </p>
         @if (profile.email) {
           <a class="button button-dark" [href]="'mailto:' + profile.email"
-            >Mulai percakapan <span aria-hidden="true">↗</span></a
+            >Start a conversation <span aria-hidden="true">↗</span></a
           >
           <a class="contact-email" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
           <a class="contact-email" [href]="profile.phoneHref">{{ profile.phone }}</a>
         } @else {
-          <p class="contact-pending">Informasi kontak segera tersedia.</p>
+          <p class="contact-pending">Contact information coming soon.</p>
         }
         <span class="contact-spark" aria-hidden="true">+</span>
       </div>
     </section>
     <footer class="site-footer section-shell">
       <span>© {{ year }} {{ profile.name }}</span
-      ><span>Thoughtfully designed. Carefully built.</span><a href="#top">Kembali ke atas ↑</a>
+      ><span>Thoughtfully designed. Carefully built.</span><a href="#top">Back to top ↑</a>
     </footer>
 
     <dialog
@@ -197,7 +223,7 @@ import { ProjectGallery } from '../components/project-gallery';
             class="dialog-close"
             type="button"
             (click)="projectDialog.close()"
-            aria-label="Tutup detail proyek"
+            aria-label="Close project details"
             autofocus
           >
             ✕
@@ -210,7 +236,7 @@ import { ProjectGallery } from '../components/project-gallery';
             @if (project.url) {
               <p>
                 <a class="text-link" [href]="project.url" target="_blank" rel="noopener noreferrer"
-                  >Kunjungi {{ project.name }} ↗</a
+                  >Visit {{ project.name }} ↗</a
                 >
               </p>
             }
@@ -233,6 +259,7 @@ export class Home {
   protected readonly organizations = organizations;
   protected readonly education = education;
   protected readonly certifications = certifications;
+  protected readonly skills = skills;
 
   protected openProject(project: PortfolioProject, dialog: HTMLDialogElement): void {
     this.selectedProject.set(project);

@@ -5,7 +5,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   selector: 'app-experience-asset',
   template: `
     <button class="experience-asset" type="button" [disabled]="!ready() && !pdfUrl()" (click)="openPreview(preview)"
-      [attr.aria-label]="'Perbesar ' + label() + ' ' + organization()">
+      [attr.aria-label]="'Enlarge ' + label() + ' ' + organization()">
       <span class="asset-image">
         @if (src() && !pdfUrl()) {
         <img #assetImage [src]="src()" [alt]="label() + ' internship ' + organization()" [hidden]="!ready()"
@@ -13,23 +13,23 @@ import { DomSanitizer } from '@angular/platform-browser';
         }
         @if (pdfUrl()) {
           <span class="asset-empty"><span class="asset-symbol" aria-hidden="true">PDF</span>
-            <span>{{ label() }}</span><small>Klik untuk melihat sertifikat</small>
+            <span>{{ label() }}</span><small>Click to view the certificate</small>
           </span>
         } @else if (!ready()) {
           <span class="asset-empty"><span class="asset-symbol" aria-hidden="true">{{ certificate() ? '▤' : '▧' }}</span>
-            <span>{{ label() }}</span><small>Belum tersedia</small>
+            <span>{{ label() }}</span><small>Not yet available</small>
           </span>
         } @else {
-          <span class="asset-expand" aria-hidden="true">Perbesar ↗</span>
+          <span class="asset-expand" aria-hidden="true">Enlarge ↗</span>
         }
       </span>
       <span class="asset-caption"><span>{{ label() }}</span><span aria-hidden="true">{{ ready() || pdfUrl() ? '↗' : '—' }}</span></span>
     </button>
     <dialog #preview class="asset-dialog" [attr.aria-label]="label() + ' ' + organization()" (click)="closeBackdrop($event, preview)" (close)="previewOpen.set(false)">
-      <button type="button" class="dialog-close" (click)="preview.close()" aria-label="Tutup pratinjau" autofocus>✕</button>
+      <button type="button" class="dialog-close" (click)="preview.close()" aria-label="Close preview" autofocus>✕</button>
       @if (pdfUrl(); as pdf) {
         @if (previewOpen()) {
-          <p class="pdf-help">Jika pratinjau tidak tampil, <a [href]="src()" target="_blank" rel="noopener noreferrer">buka PDF di tab baru ↗</a>.</p>
+          <p class="pdf-help">If the preview does not appear, <a [href]="src()" target="_blank" rel="noopener noreferrer">open the PDF in a new tab ↗</a>.</p>
           <iframe [src]="pdf" [title]="label() + ' ' + organization()"></iframe>
         }
       } @else if (ready()) { <img [src]="src()" [alt]="label() + ' internship ' + organization()" /> }
