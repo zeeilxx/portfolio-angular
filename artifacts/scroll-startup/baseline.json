@@ -1,0 +1,58 @@
+{
+  "cases": [
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": 620,
+      "after": {
+        "y": 620,
+        "calls": [],
+        "hidden": [
+          "+ Frontend & Fullstack DevelopmentInternship experience at Adira Finance",
+          "+WEB DEVELOPMENT / BOGOR",
+          "Frontend Development",
+          "+",
+          "Fullstack Development",
+          "API Integration",
+          "Backend Development",
+          "01 / EDUCATION",
+          "Foundations of development.",
+          "August 2022 – 2026",
+          "Universitas Pembangunan Nasional “Veteran” Jakarta",
+          "Informatics · Faculty of Computer Science",
+          "GPA: 3.76",
+          "Software Engineering, with a focus on Frontend Web Development.",
+          "Participated in the 2024 Student Creativity Proposal Program.",
+          "02 / WORK EXPERIENCE",
+          "Work experience.",
+          "Frontend & Fullstack DevelopmentPT. Adira Dinamika Multi Finance"
+        ]
+      }
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "before": 620,
+      "after": {
+        "y": 620,
+        "calls": [],
+        "hidden": [
+          "Download CV ↓",
+          "+ Frontend & Fullstack DevelopmentInternship experience at Adira Finance",
+          "+WEB DEVELOPMENT / BOGOR",
+          "Frontend Development",
+          "+",
+          "Fullstack Development",
+          "API Integration",
+          "Backend Development"
+        ]
+      }
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

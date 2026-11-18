@@ -2,25 +2,67 @@ import { afterNextRender, Component, ElementRef, input, signal, viewChild } from
 
 @Component({
   selector: 'app-portfolio-image',
-  host: { class: 'portfolio-image' },
+  host: { class: 'portfolio-image block h-full w-full overflow-hidden' },
   template: `
     @if (failedSrc() !== src()) {
-      <img #imageElement [src]="src()" [alt]="alt()" [style.object-fit]="fit()" [loading]="priority() ? 'eager' : 'lazy'"
-        decoding="async" [attr.fetchpriority]="priority() ? 'high' : 'auto'"
-        (error)="failedSrc.set(src())" />
+      <img
+        class="block h-full w-full object-cover"
+        #imageElement
+        [src]="src()"
+        [alt]="alt()"
+        [style.object-fit]="fit()"
+        [loading]="priority() ? 'eager' : 'lazy'"
+        decoding="async"
+        [attr.fetchpriority]="priority() ? 'high' : 'auto'"
+        (error)="failedSrc.set(src())"
+      />
     } @else {
-      <div class="image-placeholder" role="img" [attr.aria-label]="alt() + ' — image not yet available'">
-        <span aria-hidden="true">+</span><strong>{{ alt() }}</strong><small>Image not yet available</small>
+      <div
+        class="image-placeholder flex h-full flex-col items-center justify-center gap-3 bg-soft p-6 text-center text-muted [&>span]:text-[38px] [&>span]:font-light [&_strong]:text-sm [&_strong]:font-medium [&_small]:text-[11px]"
+        role="img"
+        [attr.aria-label]="alt() + ' — image not yet available'"
+      >
+        <span aria-hidden="true">+</span><strong>{{ alt() }}</strong
+        ><small>Image not yet available</small>
       </div>
     }
   `,
   styles: `
-    :host { display:block; width:100%; height:100%; overflow:hidden; }
-    img { width:100%; height:100%; object-fit:cover; display:block; }
-    .image-placeholder { height:100%; padding:24px; background:#e2e4e7; color:#62666d; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; }
-    .image-placeholder>span { font-size:38px; font-weight:300; }
-    strong { font-size:14px; font-weight:500; }
-    small { font-size:11px; }
+    :host {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .image-placeholder {
+      height: 100%;
+      padding: 24px;
+      background: #e2e4e7;
+      color: #62666d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .image-placeholder > span {
+      font-size: 38px;
+      font-weight: 300;
+    }
+    strong {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    small {
+      font-size: 11px;
+    }
   `,
 })
 export class PortfolioImage {

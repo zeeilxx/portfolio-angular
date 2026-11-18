@@ -1,0 +1,102 @@
+{
+  "samples": [
+    {
+      "before": {
+        "width": 1440,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -8.4484,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      },
+      "after": {
+        "width": 1440,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -10.4742,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      }
+    },
+    {
+      "before": {
+        "width": 390,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -12.3834,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      },
+      "after": {
+        "width": 390,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -14.4084,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      }
+    },
+    {
+      "before": {
+        "width": 390,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": 0,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      },
+      "after": {
+        "width": 390,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -2.02583,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      }
+    },
+    {
+      "before": {
+        "width": 390,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -2.54667,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      },
+      "after": {
+        "width": 390,
+        "animation": "_ngcontent-ng-c1170101804_portrait-orbit",
+        "duration": "12s",
+        "offset": -4.57167,
+        "state": [
+          "running"
+        ],
+        "frameAnimation": "_ngcontent-ng-c1170101804_portrait-frame-drift"
+      }
+    }
+  ],
+  "errors": [],
+  "reduced": {
+    "width": 390,
+    "animation": "none",
+    "duration": "0s",
+    "offset": 0,
+    "state": [],
+    "frameAnimation": "none"
+  },
+  "passed": true
+}

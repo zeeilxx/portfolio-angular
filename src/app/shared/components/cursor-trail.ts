@@ -26,7 +26,8 @@ export class CursorTrail {
         const reduced = matchMedia('(prefers-reduced-motion: reduce)');
         const precise = matchMedia('(hover: hover) and (pointer: fine)');
         const canvas = document.createElement('canvas');
-        canvas.className = 'cursor-trail';
+        canvas.className =
+          'cursor-trail pointer-events-none fixed inset-0 z-[110] m-0 h-full w-full max-h-none max-w-none overflow-hidden border-0 bg-transparent p-0 backdrop:pointer-events-none backdrop:bg-transparent motion-reduce:hidden [@media(hover:none)]:hidden [@media(pointer:coarse)]:hidden';
         canvas.setAttribute('aria-hidden', 'true');
         canvas.setAttribute('popover', 'manual');
         let context: CanvasRenderingContext2D | null = null;

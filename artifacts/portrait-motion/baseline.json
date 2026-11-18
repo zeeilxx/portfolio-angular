@@ -1,0 +1,13 @@
+{
+  "samples": [],
+  "errors": [],
+  "baseline": {
+    "width": 1440,
+    "animation": "none",
+    "duration": "0s",
+    "offset": 0,
+    "state": [],
+    "frameAnimation": "none"
+  },
+  "passed": true
+}

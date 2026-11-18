@@ -1,0 +1,30 @@
+{
+  "cases": [
+    {
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": 620,
+      "after": {
+        "y": 620,
+        "calls": [],
+        "hidden": []
+      }
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "before": 620,
+      "after": {
+        "y": 620,
+        "calls": [],
+        "hidden": []
+      }
+    }
+  ],
+  "errors": [],
+  "passed": true
+}

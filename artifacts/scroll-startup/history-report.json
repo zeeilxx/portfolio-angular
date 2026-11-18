@@ -1,0 +1,83 @@
+{
+  "cases": [
+    {
+      "type": "refresh-restores-position",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": 1350,
+      "after": 1350
+    },
+    {
+      "type": "early-scroll-after-refresh",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": 1970,
+      "after": 1970
+    },
+    {
+      "type": "anchors-and-history",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "education": 881,
+      "work": 3376
+    },
+    {
+      "type": "early-scroll-after-fragment-refresh",
+      "size": {
+        "width": 1440,
+        "height": 900
+      },
+      "before": 3836,
+      "after": 3836
+    },
+    {
+      "type": "refresh-restores-position",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "before": 1350,
+      "after": 1350
+    },
+    {
+      "type": "early-scroll-after-refresh",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "before": 1970,
+      "after": 1970
+    },
+    {
+      "type": "anchors-and-history",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "education": 1254,
+      "work": 4858
+    },
+    {
+      "type": "early-scroll-after-fragment-refresh",
+      "size": {
+        "width": 390,
+        "height": 844
+      },
+      "before": 5278,
+      "after": 5278
+    },
+    "Selecting a different route starts it at the top."
+  ],
+  "errors": [],
+  "historyExpected": {
+    "education": 1254,
+    "work": 4858
+  },
+  "passed": true
+}

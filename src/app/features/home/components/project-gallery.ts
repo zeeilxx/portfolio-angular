@@ -5,52 +5,153 @@ import { PortfolioImage } from './portfolio-image';
 @Component({
   selector: 'app-project-gallery',
   imports: [PortfolioImage],
+  host: { class: 'block min-w-0' },
   template: `
-    <section class="gallery" [attr.aria-label]="'Gallery for ' + project().name"
-      (keydown.arrowleft)="navigate(-1, $event)" (keydown.arrowright)="navigate(1, $event)">
-      <div class="gallery-image">
-        <app-portfolio-image [src]="activeImage().src"
-          [alt]="project().name + ' — ' + activeImage().caption" fit="contain" />
+    <section
+      class="gallery"
+      [attr.aria-label]="'Gallery for ' + project().name"
+      (keydown.arrowleft)="navigate(-1, $event)"
+      (keydown.arrowright)="navigate(1, $event)"
+    >
+      <div class="gallery-image relative aspect-[1.8] overflow-hidden rounded-[9px] bg-soft">
+        <app-portfolio-image
+          [src]="activeImage().src"
+          [alt]="project().name + ' — ' + activeImage().caption"
+          fit="contain"
+        />
       </div>
       @if (images().length > 1) {
-        <div class="gallery-controls">
-          <div class="gallery-navigation">
-          <button class="gallery-arrow previous" type="button" aria-label="Previous image" (click)="navigate(-1)">
-            <span aria-hidden="true">←</span>
-          </button>
-          <div class="gallery-options" aria-label="Select an image">
-            @for (item of images(); track item.src; let i = $index) {
-              <button class="gallery-dot" type="button" [attr.aria-pressed]="selectedIndex() === i"
-                [attr.aria-label]="'View image ' + (i + 1) + ': ' + item.caption"
-                [title]="item.caption" (click)="selectedIndex.set(i)"><span aria-hidden="true"></span></button>
-            }
+        <div
+          class="gallery-controls relative border-y border-line bg-white p-4 [&_p]:mt-[10px] [&_p]:mb-0 [&_p]:text-center [&_p]:text-xs [&_p]:text-muted"
+        >
+          <div class="gallery-navigation flex items-center justify-center gap-4">
+            <button
+              class="gallery-arrow grid size-11 shrink-0 place-items-center rounded-full border border-line bg-paper p-0 text-ink shadow-[0_2px_6px_#0001] hover:bg-ink hover:text-white focus-visible:outline-offset-[-5px] [&_span]:font-[Arial,sans-serif] [&_span]:text-2xl [&_span]:leading-none previous"
+              type="button"
+              aria-label="Previous image"
+              (click)="navigate(-1)"
+            >
+              <span aria-hidden="true">←</span>
+            </button>
+            <div class="gallery-options flex flex-wrap justify-center" aria-label="Select an image">
+              @for (item of images(); track item.src; let i = $index) {
+                <button
+                  class="gallery-dot grid size-11 place-items-center rounded-full bg-transparent p-0 [&_span]:size-[9px] [&_span]:rounded-full [&_span]:bg-[#a9afb8] [&[aria-pressed=true]_span]:w-6 [&[aria-pressed=true]_span]:rounded-lg [&[aria-pressed=true]_span]:bg-ink hover:[&_span]:bg-accent motion-safe:[&_span]:transition-[width,background-color] motion-safe:[&_span]:duration-200"
+                  type="button"
+                  [attr.aria-pressed]="selectedIndex() === i"
+                  [attr.aria-label]="'View image ' + (i + 1) + ': ' + item.caption"
+                  [title]="item.caption"
+                  (click)="selectedIndex.set(i)"
+                >
+                  <span aria-hidden="true"></span>
+                </button>
+              }
+            </div>
+            <button
+              class="gallery-arrow grid size-11 shrink-0 place-items-center rounded-full border border-line bg-paper p-0 text-ink shadow-[0_2px_6px_#0001] hover:bg-ink hover:text-white focus-visible:outline-offset-[-5px] [&_span]:font-[Arial,sans-serif] [&_span]:text-2xl [&_span]:leading-none next"
+              type="button"
+              aria-label="Next image"
+              (click)="navigate(1)"
+            >
+              <span aria-hidden="true">→</span>
+            </button>
           </div>
-          <button class="gallery-arrow next" type="button" aria-label="Next image" (click)="navigate(1)">
-            <span aria-hidden="true">→</span>
-          </button>
-          </div>
-          <p aria-live="polite">Image {{ selectedIndex() + 1 }} / {{ images().length }} · {{ activeImage().caption }}</p>
+          <p aria-live="polite">
+            Image {{ selectedIndex() + 1 }} / {{ images().length }} · {{ activeImage().caption }}
+          </p>
         </div>
       }
     </section>
   `,
   styles: `
-    :host { display:block; min-width:0; }
-    .gallery-image { position:relative; aspect-ratio:1.8; background:var(--soft); overflow:hidden; border-radius:9px; }
-    .gallery-controls { position:relative; padding:16px; background:#fff; border-block:1px solid var(--line); }
-    .gallery-controls p { font-size:12px; color:var(--muted); margin:10px 0 0; text-align:center; }
-    .gallery-navigation { display:flex; align-items:center; justify-content:center; gap:16px; }
-    .gallery-options { display:flex; justify-content:center; flex-wrap:wrap; }
-    .gallery-arrow { flex-shrink:0; width:44px; height:44px; display:grid; place-items:center; padding:0; border:1px solid #d2d4d8; border-radius:50%; background:var(--paper); color:var(--ink); box-shadow:0 2px 6px #0001; }
-    .gallery-arrow span { font:24px/1 Arial,sans-serif; }
-    .gallery-arrow:hover { background:var(--ink); color:white; }
-    .gallery-arrow:focus-visible { outline-offset:-5px; }
-    .gallery-dot { width:44px; height:44px; padding:0; display:grid; place-items:center; background:transparent; border-radius:50%; }
-    .gallery-dot span { width:9px; height:9px; border-radius:50%; background:#a9afb8; }
-    .gallery-dot[aria-pressed="true"] span { width:24px; border-radius:8px; background:var(--ink); }
-    .gallery-dot:hover span { background:var(--accent); }
-    @media (prefers-reduced-motion:no-preference) {
-      .gallery-dot span { transition:width .2s ease, background-color .2s ease; }
+    :host {
+      display: block;
+      min-width: 0;
+    }
+    .gallery-image {
+      position: relative;
+      aspect-ratio: 1.8;
+      background: var(--soft);
+      overflow: hidden;
+      border-radius: 9px;
+    }
+    .gallery-controls {
+      position: relative;
+      padding: 16px;
+      background: #fff;
+      border-block: 1px solid var(--line);
+    }
+    .gallery-controls p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 10px 0 0;
+      text-align: center;
+    }
+    .gallery-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .gallery-options {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .gallery-arrow {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      padding: 0;
+      border: 1px solid #d2d4d8;
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 2px 6px #0001;
+    }
+    .gallery-arrow span {
+      font:
+        24px/1 Arial,
+        sans-serif;
+    }
+    .gallery-arrow:hover {
+      background: var(--ink);
+      color: white;
+    }
+    .gallery-arrow:focus-visible {
+      outline-offset: -5px;
+    }
+    .gallery-dot {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      border-radius: 50%;
+    }
+    .gallery-dot span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #a9afb8;
+    }
+    .gallery-dot[aria-pressed='true'] span {
+      width: 24px;
+      border-radius: 8px;
+      background: var(--ink);
+    }
+    .gallery-dot:hover span {
+      background: var(--accent);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .gallery-dot span {
+        transition:
+          width 0.2s ease,
+          background-color 0.2s ease;
+      }
     }
   `,
 })
@@ -59,9 +160,13 @@ export class ProjectGallery implements OnChanges {
   protected readonly selectedIndex = signal(0);
   protected readonly images = computed(() => {
     const project = this.project();
-    return project.images?.length ? project.images : [{ src: project.image, caption: 'Project preview' }];
+    return project.images?.length
+      ? project.images
+      : [{ src: project.image, caption: 'Project preview' }];
   });
-  protected readonly activeImage = computed(() => this.images()[this.selectedIndex()] ?? this.images()[0]);
+  protected readonly activeImage = computed(
+    () => this.images()[this.selectedIndex()] ?? this.images()[0],
+  );
 
   ngOnChanges(): void {
     this.selectedIndex.set(0);
@@ -70,6 +175,8 @@ export class ProjectGallery implements OnChanges {
   protected navigate(direction: number, event?: Event): void {
     if (this.images().length < 2) return;
     event?.preventDefault();
-    this.selectedIndex.update(index => (index + direction + this.images().length) % this.images().length);
+    this.selectedIndex.update(
+      (index) => (index + direction + this.images().length) % this.images().length,
+    );
   }
 }
