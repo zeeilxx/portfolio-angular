@@ -453,18 +453,31 @@ import { ProjectGallery } from '../components/project-gallery';
       border: 1px solid #aeb4be;
       border-radius: 6px;
       pointer-events: none;
+      animation-name: portrait-frame-drift;
+      animation-duration: 8s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+    }
+
+    /* Keep references at stylesheet root so Angular scopes minified keyframe names. */
+    .portrait-orbit-trace {
+      animation-name: portrait-orbit;
+      animation-duration: 12s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+    .portrait-orbit-trace-secondary {
+      animation-delay: -6s;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .portrait-orbit-trace,
+      .hero-visual::before {
+        animation-name: none;
+      }
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      .portrait-orbit-trace {
-        animation: portrait-orbit 12s linear infinite;
-      }
-      .portrait-orbit-trace-secondary {
-        animation-delay: -6s;
-      }
-      .hero-visual::before {
-        animation: portrait-frame-drift 8s ease-in-out infinite;
-      }
       .portrait-frame app-portfolio-image {
         transition: transform 0.6s ease;
       }

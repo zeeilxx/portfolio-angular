@@ -102,8 +102,12 @@ focus, and the existing active-section indicator. The portrait decoration lives
 in the home hero and is hidden from assistive technology.
 
 Motion uses a 12-second linear perimeter trace and an 8-second eased frame drift.
-Declare both only under `prefers-reduced-motion: no-preference`. Reduced motion
-shows static frames and retains the existing automatic scrolling fallback.
+Keep portrait animation references at the component stylesheet's top level, using
+explicit animation-name, duration, timing, and iteration-count declarations.
+Disable both in a `prefers-reduced-motion: reduce` rule. Reduced motion shows static
+frames and retains the existing automatic scrolling fallback. Optimized nested
+media rules can leave animation references unscoped while Angular prefixes the
+keyframes. Verify matching names and a changing dash offset in the production build.
 
 Scroll entrances use the shared PageMotion directive: opacity and a short
 12–22px individual translate, an 850ms eased settle, and small staggered starts

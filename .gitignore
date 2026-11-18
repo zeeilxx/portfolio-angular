@@ -3,8 +3,12 @@
 # Compiled output
 /dist
 /tmp
+/.tmp/
 /out-tsc
 /bazel-out
+
+# Local debugging and generated verification reports
+/artifacts/
 
 # Node
 /node_modules
