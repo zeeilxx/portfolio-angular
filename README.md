@@ -36,6 +36,12 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
+## Vercel Web Analytics
+
+Web Analytics is initialized once in the browser entry point, `src/main.ts`. Production builds record page views; development builds use Vercel's debug mode without recording visits.
+
+To collect data, enable **Analytics** for this project in the Vercel dashboard, then deploy these changes and visit the deployed site. View visitor and page view data in that project's Analytics tab. See the [Vercel Web Analytics setup guide](https://vercel.com/docs/analytics/quickstart).
+
 ## Running unit tests
 
 To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
