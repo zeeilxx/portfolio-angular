@@ -64,7 +64,7 @@ import { ProjectGallery } from '../components/project-gallery';
         <app-profile-portrait [name]="profile.name" />
         <span
           class="vertical-caption absolute top-[142px] right-0 font-mono text-[8px] tracking-[2px] text-muted [writing-mode:vertical-rl]"
-          >WEB DEVELOPMENT / BOGOR</span
+          >Fullstack Developer</span
         >
       </div>
     </section>
