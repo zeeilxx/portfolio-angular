@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ProjectCard } from '../components/project-card';
-import { PortfolioImage } from '../components/portfolio-image';
+import { ProfilePortrait } from '../components/profile-portrait';
 import { certifications, education, profile, projects, skills } from '../portfolio.data';
 import { Experience } from '../../experience/pages/experience';
 import { organizations } from '../../experience/experience.data';
@@ -9,7 +9,7 @@ import { ProjectGallery } from '../components/project-gallery';
 
 @Component({
   selector: 'app-home',
-  imports: [ProjectCard, PortfolioImage, Experience, ProjectGallery],
+  imports: [ProjectCard, ProfilePortrait, Experience, ProjectGallery],
   template: `
     <section
       class="hero relative isolate grid grid-cols-[1.25fr_1fr] items-center gap-[76px] pt-[92px] pb-[98px] max-[1000px]:gap-[35px] max-[1000px]:py-[65px] max-[760px]:grid-cols-1 max-[760px]:gap-[45px] max-[760px]:py-[52px] section-shell mx-auto w-[min(1200px,calc(100%_-_96px))] max-[760px]:w-[calc(100%_-_40px)]"
@@ -61,52 +61,7 @@ import { ProjectGallery } from '../components/project-gallery';
       <div
         class="hero-visual relative isolate pr-7 max-[760px]:mx-auto max-[760px]:w-full max-[760px]:max-w-[420px] max-[760px]:pl-3"
       >
-        <div class="portrait-shell relative">
-          <svg
-            class="portrait-orbit pointer-events-none absolute -inset-[10px] h-[calc(100%_+_20px)] w-[calc(100%_+_20px)] overflow-visible [&_rect]:fill-none [&_rect]:[vector-effect:non-scaling-stroke]"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            focusable="false"
-          >
-            <rect
-              class="portrait-orbit-track stroke-line [stroke-width:1]"
-              x="1"
-              y="1"
-              width="98"
-              height="98"
-              rx="1.8"
-            />
-            <rect
-              class="portrait-orbit-trace stroke-accent [stroke-width:2] [stroke-linecap:round] [stroke-dasharray:14_86]"
-              x="1"
-              y="1"
-              width="98"
-              height="98"
-              rx="1.8"
-              pathLength="100"
-            />
-            <rect
-              class="portrait-orbit-trace portrait-orbit-trace-secondary stroke-accent [stroke-width:3] [stroke-linecap:round] [stroke-dasharray:1_99] [stroke-dashoffset:-50]"
-              x="1"
-              y="1"
-              width="98"
-              height="98"
-              rx="1.8"
-              pathLength="100"
-            />
-          </svg>
-          <div
-            class="portrait-frame relative h-[470px] overflow-hidden rounded-[6px] bg-[#c9ccd2] max-[1000px]:h-[415px] max-[760px]:h-[430px] max-[420px]:h-[390px]"
-          >
-            <app-portfolio-image
-              src="/images/Profile.jpg"
-              [alt]="'Portrait of ' + profile.name"
-              [priority]="true"
-            />
-          </div>
-        </div>
-        <span class="hero-spark hidden" aria-hidden="true">+</span>
+        <app-profile-portrait [name]="profile.name" />
         <span
           class="vertical-caption absolute top-[142px] right-0 font-mono text-[8px] tracking-[2px] text-muted [writing-mode:vertical-rl]"
           >WEB DEVELOPMENT / BOGOR</span
@@ -443,94 +398,6 @@ import { ProjectGallery } from '../components/project-gallery';
         </div>
       }
     </dialog>
-  `,
-  styles: `
-    .hero-visual::before {
-      content: '';
-      position: absolute;
-      inset: 20px 8px -20px 20px;
-      z-index: -1;
-      border: 1px solid #aeb4be;
-      border-radius: 6px;
-      pointer-events: none;
-      animation-name: portrait-frame-drift;
-      animation-duration: 8s;
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-    }
-
-    /* Keep references at stylesheet root so Angular scopes minified keyframe names. */
-    .portrait-orbit-trace {
-      animation-name: portrait-orbit;
-      animation-duration: 12s;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-    }
-    .portrait-orbit-trace-secondary {
-      animation-delay: -6s;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .portrait-orbit-trace,
-      .hero-visual::before {
-        animation-name: none;
-      }
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .portrait-frame app-portfolio-image {
-        transition: transform 0.6s ease;
-      }
-
-      @media (hover: hover) and (pointer: fine) {
-        .portrait-frame {
-          transform: perspective(1000px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
-          transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .portrait-frame.pointer-active {
-          transition-duration: 0.14s;
-        }
-        .portrait-frame:hover app-portfolio-image {
-          transform: scale(1.025);
-        }
-        .portrait-frame::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          border-radius: inherit;
-          pointer-events: none;
-          background: radial-gradient(
-            340px circle at var(--pointer-x, 50%) var(--pointer-y, 50%),
-            #ffffff2e,
-            transparent 70%
-          );
-          opacity: 0;
-          transition: opacity 0.4s;
-        }
-        .portrait-frame.pointer-active::after {
-          opacity: 1;
-        }
-      }
-    }
-
-    @keyframes portrait-orbit {
-      from {
-        stroke-dashoffset: 0;
-      }
-      to {
-        stroke-dashoffset: -100;
-      }
-    }
-    @keyframes portrait-frame-drift {
-      0%,
-      100% {
-        transform: translate(0, 0);
-      }
-      50% {
-        transform: translate(5px, -7px);
-      }
-    }
   `,
 })
 export class Home {

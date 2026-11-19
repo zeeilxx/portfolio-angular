@@ -1,7 +1,7 @@
 ---
 version: alpha
 name: 'Ridhan Fadhlil Wafi Portfolio'
-description: 'A monochrome developer portfolio with technical captions and a quietly animated portrait frame.'
+description: 'A monochrome developer portfolio with technical captions and a layered interactive 3D portrait.'
 colors:
   background: '#f4f4f5'
   primary: '#202226'
@@ -26,8 +26,8 @@ components:
   navigation:
     position: 'sticky'
   portrait:
-    orbit-duration: '12s'
-    frame-drift-duration: '8s'
+    rounded: '{rounded.portrait}'
+    backgroundColor: '{colors.surface}'
 ---
 
 # Portfolio design context
@@ -40,9 +40,12 @@ Indonesian professional context. The existing visual reference is a restrained
 technical portfolio: graphite typography, cool gray paper, fine rules, and
 monospaced captions beside real project imagery.
 
-The portrait is the signature: a moving slate line traces its perimeter while an
-offset frame drifts slowly behind it. Keep surrounding navigation and content
-quiet. Avoid neon colors, particle clutter, and animation over the person's face.
+The portrait is the signature: a rectangular photograph floats in front of two
+offset slate plates, with raised corner brackets, pointer tilt, gentle image
+parallax, and soft reflected light. Small glass cubes, translucent fragments, light
+streaks, and eight sparse motes surround its edges at different 3D depths. Keep
+surrounding navigation and content quiet. Avoid orbit rings, neon colors, particle
+clutter, and effects that obscure the face.
 
 `src/styles.css` owns shared color, font, scrollbar, and accessibility tokens.
 Its `@theme inline` maps those variables to Tailwind utilities such as `bg-paper`,
@@ -56,8 +59,8 @@ it does not generate a second theme.
 The frontmatter maps directly to `:root` in `src/styles.css`: background to
 `--paper`, primary to `--ink`, muted to `--muted`, border to `--line`, accent to
 `--accent`, and surface to `--soft`. Navigation uses the paper background, with
-translucency and blur where supported. The portrait orbit uses the shared border
-and accent variables. The site currently has one light theme.
+translucency and blur where supported. The portrait plates and corner brackets
+use the shared border, surface, and accent variables. The site has one light theme.
 
 ## Typography
 
@@ -91,23 +94,38 @@ existing card shadows and the portrait's pointer tilt.
 ## Shapes
 
 Use the established 5px button, 6px portrait, and 16px project-card radii.
-The portrait perimeter follows the photo's rectangular shape. Decorations must
-not change the image crop, reserve extra layout space, or intercept pointers.
+The portrait keeps the photo's rectangular shape and original responsive footprint.
+Its shallow image parallax uses a fixed 1.035 scale to cover the edges. Keep the
+face visible; decorations must not reserve extra layout space or intercept pointers.
 
 ## Components
 
 Navigation is shared through `src/app/shared/components/navbar.ts`; its Tailwind
 host classes own the sticky surface. Preserve native links, visible keyboard
-focus, and the existing active-section indicator. The portrait decoration lives
-in the home hero and is hidden from assistive technology.
+focus, and the existing active-section indicator. The home-owned
+`profile-portrait.ts` component owns the portrait layers and decorative lighting.
+Decorations are hidden from assistive technology; the photograph retains its alt
+text and existing image-loading fallback.
 
-Motion uses a 12-second linear perimeter trace and an 8-second eased frame drift.
-Keep portrait animation references at the component stylesheet's top level, using
-explicit animation-name, duration, timing, and iteration-count declarations.
-Disable both in a `prefers-reduced-motion: reduce` rule. Reduced motion shows static
-frames and retains the existing automatic scrolling fallback. Optimized nested
-media rules can leave animation references unscoped while Angular prefixes the
-keyframes. Verify matching names and a changing dash offset in the production build.
+Portrait motion uses an 8-second gentle float, 1100px perspective, and pointer tilt
+bounded to 8 degrees on each axis. The shared PointerMotion directive writes
+normalized portrait coordinates to the stable `.portrait-scene` surface; the photo,
+raised corners, light, and shadow consume those coordinates at different depths.
+It runs outside Angular and batches pointer updates with requestAnimationFrame.
+Keep animation references at the component stylesheet's top level so Angular scopes
+optimized keyframe names. Pause the float while offscreen or the document is hidden.
+Coarse pointers retain shallow ambient depth without pointer tracking or blocking
+touch scrolling. Reduced motion disables the float, tilt, parallax, and light,
+leaving the photo and static offset plates visible.
+
+The feature-owned `portrait-effects.ts` adds peripheral objects to the same
+preserve-3d scene. Two six-faced glass cubes rotate slowly; two glass fragments,
+two light streaks, and eight deterministic motes drift between nearby depth planes.
+Their shared field reacts to the portrait coordinates with stronger parallax.
+Keep the effects at the edges, clear of the face and vertical caption. The inherited
+`--portrait-motion` property pauses every animation with the portrait. Reduced
+motion hides this decorative field. Narrow screens use smaller objects and reduced
+depth, preserving the existing footprint and native touch scrolling.
 
 Scroll entrances use the shared PageMotion directive: opacity and a short
 12–22px individual translate, an 850ms eased settle, and small staggered starts

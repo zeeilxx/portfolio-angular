@@ -16,7 +16,7 @@ export class PointerMotion {
         const reduced = matchMedia('(prefers-reduced-motion: reduce)');
         const precise = matchMedia('(hover: hover) and (pointer: fine)');
         const surfaceSelector =
-          '.project-card, .certification-card, .portrait-frame, .contact-panel';
+          '.project-card, .certification-card, .portrait-scene, .contact-panel';
         let surface: HTMLElement | null = null;
         let magnet: HTMLElement | null = null;
         let hero: HTMLElement | null = null;
@@ -26,7 +26,14 @@ export class PointerMotion {
         const clearSurface = () => {
           if (!surface) return;
           surface.classList.remove('pointer-active');
-          for (const key of ['--pointer-x', '--pointer-y', '--tilt-x', '--tilt-y']) {
+          for (const key of [
+            '--pointer-x',
+            '--pointer-y',
+            '--tilt-x',
+            '--tilt-y',
+            '--portrait-x',
+            '--portrait-y',
+          ]) {
             surface.style.removeProperty(key);
           }
           surface = null;
@@ -75,7 +82,18 @@ export class PointerMotion {
             const y = Math.max(0, Math.min(bounds.height, event.clientY - bounds.top));
             surface.style.setProperty('--pointer-x', `${x}px`);
             surface.style.setProperty('--pointer-y', `${y}px`);
-            const depth = surface.matches('.portrait-frame') ? 5 : 2.2;
+            const portrait = surface.matches('.portrait-scene');
+            const depth = portrait ? 16 : 2.2;
+            if (portrait) {
+              surface.style.setProperty(
+                '--portrait-x',
+                `${(x / Math.max(bounds.width, 1) - 0.5) * 2}`,
+              );
+              surface.style.setProperty(
+                '--portrait-y',
+                `${(y / Math.max(bounds.height, 1) - 0.5) * 2}`,
+              );
+            }
             surface.style.setProperty(
               '--tilt-x',
               `${(0.5 - y / Math.max(bounds.height, 1)) * depth}deg`,
